@@ -22,7 +22,7 @@ const context = {
       removeCss.forEach(f => f());
     };
   },
-  
+
 };
 
 const container = document.getElementById('app');
