@@ -14,6 +14,7 @@
   ],
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.44",
+    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",
@@ -26,6 +27,7 @@
     "history": "^4.7.2",
     "isomorphic-style-loader": "^4.0.0",
     "jsonwebtoken": "^8.2.1",
+    "lodash": "^4.17.10",
     "node-fetch": "^2.1.2",
     "normalize.css": "^8.0.0",
     "passport": "^0.4.0",
@@ -76,7 +78,6 @@
     "flow-bin": "^0.69.0",
     "front-matter": "^2.3.0",
     "glob": "^7.1.2",
-    "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.4.3",
     "lint-staged": "^7.0.4",
