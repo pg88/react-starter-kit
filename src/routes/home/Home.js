@@ -44,11 +44,7 @@ class Home extends React.Component {
           })
           .catch((error) => {
             if (error.response) {
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.message);
-              this.setState({ apiError: error.response })
-              console.log(this.state.apiError)
+              this.setState({ apiError: error.response });
             }
           });
     } else {
