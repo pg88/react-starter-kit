@@ -1,7 +1,8 @@
 import React from 'react';
-import axios from 'axios';
+
 import * as _ from 'lodash';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import API from "../../api/index"
 import s from './Home.css';
 
 class Home extends React.Component {
@@ -12,6 +13,7 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       userQuery: '',
+      apiError: null,
       queryResults: [],
       hasResults: false,
       isEmptyQuery: null,
@@ -25,26 +27,30 @@ class Home extends React.Component {
   searchQuery() {
     if (!_.isEmpty(this.state.userQuery)) {
       this.setState({ isEmptyQuery: false });
-      axios
-        .get(
-          `https://www.googleapis.com/customsearch/v1?key=AIzaSyAR82xZOpN0jmW5_WaT3WP6OUfYlvChoaU&cx=017576662512468239146:omuauf_lfve&q=${
-            this.state.userQuery
-          }`,
-        )
-        .then(res => {
-          if (res) {
-            if (_.size(res.data.items) > 0) {
-              const queryResultsAPI = res.data.items;
-              if (_.size(queryResultsAPI) > 0) {
-                this.setState({ hasResults: true });
-                this.setState({ queryResults: [_.head(queryResultsAPI)] });
-                this.setState({
-                  searchInformation: res.data.searchInformation,
-                });
+      API.get(`&q=${this.state.userQuery}`)
+          .then(res => {
+            if (res) {
+              if (_.size(res.data.items) > 0) {
+                const queryResultsAPI = res.data.items;
+                if (_.size(queryResultsAPI) > 0) {
+                  this.setState({ hasResults: true });
+                  this.setState({ queryResults: [_.head(queryResultsAPI)] });
+                  this.setState({
+                    searchInformation: res.data.searchInformation
+                  });
+                }
               }
             }
-          }
-        });
+          })
+          .catch((error) => {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.message);
+              this.setState({ apiError: error.response })
+              console.log(this.state.apiError)
+            }
+          });
     } else {
       this.setState({ isEmptyQuery: true });
     }
@@ -58,6 +64,7 @@ class Home extends React.Component {
   render() {
     const hasResults = this.state.hasResults;
     const isEmptyQuery = this.state.isEmptyQuery;
+    const apiError = this.state.apiError;
     return (
       <div className={s.root}>
         <div className={s.container}>
@@ -112,6 +119,7 @@ class Home extends React.Component {
               )}
             </div>
           )}
+          { apiError ? (<div><br/>  Something went wrong :(. <br/> <br/> <small>Error code:{this.state.apiError.data.error.code} -- {this.state.apiError.data.error.message}</small> </div>) : ""}
         </div>
       </div>
     );
