@@ -17,7 +17,7 @@ class Home extends React.Component {
       queryResults: [],
       hasResults: false,
       isEmptyQuery: null,
-      searchInformation: {},
+      searchInformation: {}
     };
   }
   handleChange(event) {
@@ -65,14 +65,14 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h3>Search Engine Query - Google Custom Search API</h3>
-          <div className="search-box">
+          <div className={s.searchbox}>
             <input
-              className="search-box--input"
+              className={s.searchboxinput}
               type="text"
               name="userQuery"
               onChange={this.handleChange}
             />
-            <button className="search-box--button" onClick={this.searchQuery}>
+            <button className={s.searchboxbutton} onClick={this.searchQuery}>
               search
             </button>
           </div>

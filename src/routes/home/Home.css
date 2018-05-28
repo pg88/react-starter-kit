@@ -11,21 +11,23 @@
   max-width: var(--max-content-width);
 }
 
-.search-box{
+.searchbox {
   display: block;
   width: 100%;
 }
 
-.search-box--input{
-  width: 80%;
+.searchboxinput {
+  width: 75%;
+  padding: 16px;
 }
 
-.search-box--button{
+.searchboxbutton {
   border: 0;
+  width: 15%;
   color: white;
-  padding: 16px;
+  padding: 18px;
+  cursor: pointer;
   background: #373277;
-  width: 20%;
 }
 
 .newsDesc {
